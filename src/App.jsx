@@ -1,6 +1,6 @@
-import Signin from "./signin/signin";
+import Signin from "./pages/signin/signin";
 import { Route, Routes  } from "react-router-dom";
-import Signup from "./signup/Signup";
+import Signup from "./pages/signup/Signup";
 
 
 function App() {
