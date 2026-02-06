@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import "./sign.css";
 const Signin = () => {
 
@@ -43,7 +43,7 @@ const Signin = () => {
 
                             </form>
                             {/*Register*/}
-                            <p className="text-center"> Dont have a account? <a href="#" className="text-decoration-none">Sign up</a></p>
+                            <p className="text-center"> Dont have a account? <Link to="/signup" className="text-decoration-none">Sign up</Link></p>
 
 
                         </card>
