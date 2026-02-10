@@ -1,5 +1,56 @@
 import {Link} from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate }  from "react-router-dom";
+
+
+
 const Signup=()=>{
+ const[Name, setName]=useState("");
+ const[Email, setEmail]=useState("");
+ const[Phone, setPhone]=useState("");
+ const[Password, setPassword]=useState("");
+ const [Confrimpass ,setConfrimpass]=useState(""); 
+ const [Error, setError]=useState("");
+
+ const navigate = useNavigate();
+
+ const handlesubtmit=async (e)=>{
+  e.preventDefault();
+
+  if(Password !== Confrimpass){alert("Password and Confirm Password do not match!"); return;}
+
+  try {
+   
+
+   const response = await axios.post("http://localhost:8885/users", {
+    name: Name,
+    email: Email,
+    password: Password,
+     phone: Phone
+});
+
+
+       if (response.status === 201) {
+                alert("Signup successful! You can now log in.");
+                 navigate("/");
+            }
+    console.log(response.data);
+   
+
+
+    
+  } catch (error) {
+     console.error("Signup error:", error);
+     setError(error.response?.data?.error || "Signup failed");
+    
+  }
+ }
+ 
+
+ 
+
+
 
 
     return(
@@ -25,7 +76,7 @@ const Signup=()=>{
                 Create Account
               </h2>
 
-              <form>
+              <form  onSubmit={handlesubtmit}>
 
                 {/* Full Name */}
                 <div className="mb-3">
@@ -34,6 +85,9 @@ const Signup=()=>{
                     type="text"
                     className="form-control"
                     placeholder="Enter your name"
+                    value={Name}
+                    onChange={(e)=>setName(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -44,6 +98,9 @@ const Signup=()=>{
                     type="email"
                     className="form-control"
                     placeholder="Enter your email"
+                    value={Email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -54,6 +111,9 @@ const Signup=()=>{
                     type="tel"
                     className="form-control"
                     placeholder="Enter your phone number"
+                    value={Phone}
+                    onChange={(e)=>setPhone(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -64,6 +124,9 @@ const Signup=()=>{
                     type="password"
                     className="form-control"
                     placeholder="Create a password"
+                    value={Password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -74,6 +137,9 @@ const Signup=()=>{
                     type="password"
                     className="form-control"
                     placeholder="Confirm password"
+                    value={Confrimpass}
+                    onChange={(e)=>setConfrimpass(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -89,6 +155,7 @@ const Signup=()=>{
                 <button className="btn btn-primary w-100">
                   Register
                 </button>
+                {Error && <p className="text-danger mt-2">{Error}</p>}
 
               </form>
 
