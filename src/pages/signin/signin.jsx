@@ -70,7 +70,7 @@ const Signin = () => {
                             </form>
                             {/*Register*/}
                             <p className="text-center"> Dont have a account? <Link to="/signup" className="text-decoration-none">Sign up</Link></p>
-                            <Link to="/dashboard" className="text-decoration-none">Go to Dashboard</Link>
+                           
 
                         </card>
                     </div>
