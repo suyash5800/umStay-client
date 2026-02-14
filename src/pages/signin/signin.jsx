@@ -1,8 +1,29 @@
 import { Link } from "react-router-dom";
 import "./sign.css";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
 
+    const [email , setemail] = useState();
+    const [password , setpassword] = useState();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+          const response = await axios.post(`https://api.escuelajs.co/api/v1/auth/login`,{email,password});
+    if(response.data.access_token){
+        console.log("successfully login");
+        navigate("/dashboard");
+    }else{
+        alert("Login failed! Please check your credentials and try again.");
+    }
+    
+    
+    }
+
+  
     return (
         <div className="Container-fluid justify-content-center align-items-center d-flex bg-light vh-100">
             <div className="row w-100 ">
@@ -19,16 +40,20 @@ const Signin = () => {
                     <div className="card shadow-lg border-0 p-4">
                         <card className="card-body">
                             <h2 className="text-center mb-4 fw-bold">Login</h2>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 {/*Email*/}
                                 <div className="mb-3">
                                     <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" placeholder="Enter your email" />
+                                    <input type="email"
+                                     className="form-control"
+                                      placeholder="Enter your email" 
+                                      onChange={(e)=> setemail(e.target.value)}/>
                                 </div>
                                 {/*Password*/}
                                 <div className="mb-3">
                                     <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" placeholder="Enter your password " />
+                                    <input type="password" className="form-control" placeholder="Enter your password "
+                                    onChange={(e)=> setpassword(e.target.value)} />
                                 </div>
                                 {/*Remember and forget  */}
                                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -40,7 +65,7 @@ const Signin = () => {
                                     <a href="#" className="text-decoration-none">Fogot passward</a>
                                 </div>
                                 {/*Login button*/}
-                                <button className="btn btn-primary w-100">login</button>
+                                <button className="btn btn-primary w-100" type="submit">login</button>
 
                             </form>
                             {/*Register*/}
