@@ -54,7 +54,7 @@ const Signup=()=>{
 
 
     return(
-       <div className="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
+       <div className="Container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
       <div className="row w-100">
 
         {/* LEFT SIDE */}
