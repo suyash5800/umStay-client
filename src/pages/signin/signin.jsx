@@ -6,24 +6,46 @@ import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
 
-    const [email , setemail] = useState();
-    const [password , setpassword] = useState();
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
+    const [loading, setloading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-          const response = await axios.post(`https://api.escuelajs.co/api/v1/auth/login`,{email,password});
-    if(response.data.access_token){
-        console.log("successfully login");
-        navigate("/dashboard");
-    }else{
-        alert("Login failed! Please check your credentials and try again.");
+        setloading(true);
+try {
+
+    const response = await axios.post(`https://api.escuelajs.co/api/v1/auth/login`, { email, password });
+        if (response.data.access_token) {
+            console.log("successfully login");
+            localStorage.setItem("token",response.data.access_token);
+            navigate("/dashboard");
+        }
+
+    
+} catch (error) {
+   if (error.response) {
+        alert("Invalid email or password");
+    } else {
+        alert("Server error. Please try again later.");
     }
+    console.error(error);
     
     
+}finally{
+    setloading(false);
+
+}
+
+
+
+        
+
+
     }
 
-  
+
     return (
         <div className="Container-fluid justify-content-center align-items-center d-flex bg-light vh-100">
             <div className="row w-100 ">
@@ -38,22 +60,22 @@ const Signin = () => {
                 </div>
                 <div className="col-lg-6 col-md-8 col-sm-10 mx-auto  border-1 text-black bg-rightside  ">
                     <div className="card shadow-lg border-0 p-4">
-                        <card className="card-body">
+                        <div className="card-body">
                             <h2 className="text-center mb-4 fw-bold">Login</h2>
                             <form onSubmit={handleSubmit}>
                                 {/*Email*/}
                                 <div className="mb-3">
                                     <label className="form-label">Email</label>
                                     <input type="email"
-                                     className="form-control"
-                                      placeholder="Enter your email" 
-                                      onChange={(e)=> setemail(e.target.value)}/>
+                                        className="form-control"
+                                        placeholder="Enter your email"
+                                        onChange={(e) => setemail(e.target.value)} />
                                 </div>
                                 {/*Password*/}
                                 <div className="mb-3">
                                     <label className="form-label">Password</label>
                                     <input type="password" className="form-control" placeholder="Enter your password "
-                                    onChange={(e)=> setpassword(e.target.value)} />
+                                        onChange={(e) => setpassword(e.target.value)} />
                                 </div>
                                 {/*Remember and forget  */}
                                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -65,14 +87,15 @@ const Signin = () => {
                                     <a href="#" className="text-decoration-none">Fogot passward</a>
                                 </div>
                                 {/*Login button*/}
-                                <button className="btn btn-primary w-100" type="submit">login</button>
+                                <button className="btn btn-primary w-100" type="submit" disabled={loading}
+                                >{loading ? "logging in..." : "Login"}</button>
 
                             </form>
                             {/*Register*/}
                             <p className="text-center"> Dont have a account? <Link to="/signup" className="text-decoration-none">Sign up</Link></p>
-                           
 
-                        </card>
+
+                        </div>
                     </div>
 
                 </div>

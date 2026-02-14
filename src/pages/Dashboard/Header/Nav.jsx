@@ -1,6 +1,13 @@
 import "./Nav.css";
+import {useNavigate} from "react-router-dom";
 
 const Nav =()=>{
+  const navigate = useNavigate();
+   const logout=(e)=>{
+    
+    localStorage.removeItem("token");
+    navigate("/");
+   }
     return(
          <nav
       className="navbar navbar-custom navbar-expand-lg sticky-top"
@@ -14,6 +21,7 @@ const Nav =()=>{
         >
           AdminPanel
         </a>
+        <a className="btn btn-danger " onClick={logout}> Logout</a>
 
    
         <button

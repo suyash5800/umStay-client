@@ -1,9 +1,21 @@
 import Nav from "../Header/Nav";
+import Sidebar from "../Sidebar/Sidebar";
 import "./dashboard.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard=()=>{
 
-    console.log("this is dashboard page");
+    const navigate = useNavigate();
+    useEffect(()=>{
+        const token=localStorage.getItem("token");
+        if(!token){
+            navigate("/");
+            return null;
+            
+        }
+    },[])
+    
 
     return(
         <div className="container-fluid">
@@ -15,9 +27,10 @@ const Dashboard=()=>{
                { /*secound row which conatine sidebar and main content */}
 
                 <div className="row ">
-                    <div className="col-lg-3 col-mg-3 col-sm-1 ">this is sidebar</div>
+                   <Sidebar/>
                     <div className="col-lg-9 col-mg-9 col-sm-11"> 
-                    <h1 className="text-center">this is for main content </h1> </div>
+                    <h1 className="text-center">this is for main content </h1>
+                     </div>
 
                 </div>
 
