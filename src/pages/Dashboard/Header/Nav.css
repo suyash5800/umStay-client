@@ -1,0 +1,34 @@
+.navbar-custom {
+    background-color: #111827;
+    border-bottom: 1px solid #2A2A2A;
+    padding: 10px 20px;
+}
+
+.logo-style {
+    color: #E5E7EB;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.scearch-bar {
+    background-color: #1F2937;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+
+}
+
+.scearch-bar:hover {
+    background-color: #374151;
+}
+
+.profile-style {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #374151;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
