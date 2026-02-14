@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./sign.css";
+
 const Signin = () => {
 
     return (
@@ -52,7 +53,7 @@ const Signin = () => {
                 </div>
             </div>
 
-
+        <Link to="/dashboard" className="text-decoration-none">Go to Dashboard</Link>
         </div>
     );
 }
