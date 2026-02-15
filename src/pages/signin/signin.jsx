@@ -16,7 +16,7 @@ const Signin = () => {
         setloading(true);
 try {
 
-    const response = await axios.post(`https://api.escuelajs.co/api/v1/auth/login`, { email, password });
+    const response = await axios.post(`http://localhost:8535/user`, { email, password });
         if (response.data.access_token) {
             console.log("successfully login");
             localStorage.setItem("token",response.data.access_token);
