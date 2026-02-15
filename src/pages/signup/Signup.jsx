@@ -23,7 +23,7 @@ const Signup=()=>{
   try {
    
 
-   const response = await axios.post("https://unstay-server-3.onrender.com/users", {
+   const response = await axios.post("https://testserver-1-v7a4.onrender.com/user", {
     name: Name,
     email: Email,
     password: Password,
