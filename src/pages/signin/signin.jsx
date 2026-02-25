@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import "./sign.css";
 import { useState } from "react";
 import axios from "axios";
@@ -14,25 +14,28 @@ const Signin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setloading(true);
+        console.log("button hit ");
 try {
 
     const response = await axios.post(`https://testserver-1-v7a4.onrender.com/login`, { email, password });
-        if (response.data.access_token) {
+        if (response.data.token) {
+             console.log("in try block inner");
             console.log("successfully login");
-            localStorage.setItem("token",response.data.access_token);
+            localStorage.setItem("token",response.data.token);
             navigate("/dashboard");
         }
+       
 
     
 } catch (error) {
-   if (error.response) {
-        alert("Invalid email or password");
+    console.log("FULL ERROR:", error);
+    console.log("SERVER ERROR:", error.response?.data);
+
+    if (error.response) {
+        alert(error.response.data.message || "Server error");
     } else {
-        alert("Server error. Please try again later.");
+        alert("Server not reachable");
     }
-    console.error(error);
-    
-    
 }finally{
     setloading(false);
 
