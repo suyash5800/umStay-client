@@ -1,0 +1,32 @@
+.dashboard-container {
+    background-color: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* Sidebar mobile behavior */
+.sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+    transition: 0.3s;
+    padding-top: 60px;
+}
+
+.sidebar-mobile.show {
+    left: 0;
+}
+
+/* Hide sidebar overlay on large screens */
+@media (min-width: 992px) {
+    .sidebar-mobile {
+        position: static;
+        height: auto;
+        width: auto;
+        left: 0;
+        padding-top: 0;
+    }
+}
