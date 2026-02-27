@@ -1,15 +1,21 @@
+import { message } from "antd";
 import "./Nav.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Nav =()=>{
+const Nav = () => {
   const navigate = useNavigate();
-   const logout=(e)=>{
-    
-    localStorage.removeItem("token");
+  const logout = (res, req) => {
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none"
+    });
+    res.status(200).json({ success: true, message: "Logout successfull " });
+
     navigate("/");
-   }
-    return(
-         <nav
+  }
+  return (
+    <nav
       className="navbar navbar-custom navbar-expand-lg sticky-top"
     >
       <div className="container-fluid">
@@ -17,13 +23,13 @@ const Nav =()=>{
         <a
           className="navbar-brand logo-style"
           href="#"
-          
+
         >
           AdminPanel
         </a>
         <a className="btn btn-danger " onClick={logout}> Logout</a>
 
-   
+
         <button
           className="navbar-toggler"
           type="button"
@@ -38,7 +44,7 @@ const Nav =()=>{
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav align-items-center gap-lg-3">
 
-           
+
             <li className="nav-item d-none d-lg-block">
               <input
                 type="text"
@@ -50,7 +56,7 @@ const Nav =()=>{
             <li className="nav-item">
               <span
                 className="nav-link cursor-pointer"
-                style={{ color: "#9CA3AF"}}
+                style={{ color: "#9CA3AF" }}
               >
                 🔔
               </span>
@@ -60,7 +66,7 @@ const Nav =()=>{
             <li className="nav-item">
               <div
                 className="d-flex justify-content-center align-items-center profile-style"
-                
+
               >
                 U
               </div>
@@ -70,6 +76,6 @@ const Nav =()=>{
         </div>
       </div>
     </nav>
-    )
+  )
 }
 export default Nav;

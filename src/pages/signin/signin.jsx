@@ -1,6 +1,6 @@
 import {  Link } from "react-router-dom";
 import "./sign.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,23 @@ const Signin = () => {
     const [password, setpassword] = useState("");
     const [loading, setloading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        const autoCheck = async ()=>{
+            try {
+                const res = await axios.get("https://test-server-8kf3.vercel.app/getUser", {
+                    withCredentials: true
+                });
+
+                if(res.data.success) navigate("/dashboard");
+                
+            } catch (error) {
+                 console.log("User not authenticated");
+                
+            }
+        };
+        autoCheck();
+    },[]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
