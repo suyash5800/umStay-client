@@ -1,4 +1,4 @@
-import { data, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import "./sign.css";
 import { useState } from "react";
 import axios from "axios";
@@ -15,35 +15,34 @@ const Signin = () => {
         e.preventDefault();
         setloading(true);
         console.log("button hit ");
-try {
+        try {
 
-    const response = await axios.post(`https://testserver-1-v7a4.onrender.com/login`, { email, password });
-        if (response.data.token) {
-             console.log("in try block inner");
-            console.log("successfully login");
-            localStorage.setItem("token",response.data.token);
-            navigate("/dashboard");
+            const response = await axios.post(`https://testserver-1-v7a4.onrender.com/login`, { email, password }, { withCredentials: true });
+            if (response.data.success) {
+                console.log("successfully login");
+                navigate("/dashboard");
+            }
+      
+
+
+
+        } catch (error) {
+            console.log("FULL ERROR:", error);
+            console.log("SERVER ERROR:", error.response?.data);
+
+            if (error.response) {
+                alert(error.response.data.message || "Server error");
+            } else {
+                alert("Server not reachable");
+            }
+        } finally {
+            setloading(false);
+
         }
-       
-
-    
-} catch (error) {
-    console.log("FULL ERROR:", error);
-    console.log("SERVER ERROR:", error.response?.data);
-
-    if (error.response) {
-        alert(error.response.data.message || "Server error");
-    } else {
-        alert("Server not reachable");
-    }
-}finally{
-    setloading(false);
-
-}
 
 
 
-        
+
 
 
     }

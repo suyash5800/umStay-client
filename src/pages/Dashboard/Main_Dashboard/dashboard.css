@@ -1,32 +1,58 @@
-.dashboard-container {
-    background-color: #f5f7fa;
-    min-height: 100vh;
+/* Layout Basics */
+.dashboard-layout {
+    overflow-x: hidden;
 }
 
-/* Sidebar mobile behavior */
-.sidebar-mobile {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 75%;
-    height: 100%;
-    background: white;
+/* Sidebar Styling */
+.sidebar-aside {
+    width: 260px;
+    background: #ffffff;
+    border-right: 1px solid #dee2e6;
+    min-height: calc(100vh - 60px);
+    transition: transform 0.3s ease-in-out;
     z-index: 1000;
-    transition: 0.3s;
-    padding-top: 60px;
 }
 
-.sidebar-mobile.show {
-    left: 0;
-}
-
-/* Hide sidebar overlay on large screens */
-@media (min-width: 992px) {
-    .sidebar-mobile {
-        position: static;
-        height: auto;
-        width: auto;
+/* Mobile View for Sidebar (Drawer Mode) */
+@media (max-width: 991.98px) {
+    .sidebar-aside {
+        position: fixed;
+        top: 0;
         left: 0;
-        padding-top: 0;
+        height: 100vh;
+        transform: translateX(-100%); /* Start hidden off-screen */
+        z-index: 2000;
+        box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
     }
+
+    .sidebar-aside.show {
+        transform: translateX(0); /* Slide in */
+    }
+
+    /* Dark background overlay */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        z-index: 1500;
+    }
+}
+
+/* Card Enhancements */
+.rounded-4 {
+    border-radius: 16px !important;
+}
+
+.main-viewport {
+    min-width: 0; /* Prevents layout break on mobile */
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar-inner-content {
+    height: 100%;
+    overflow-y: auto;
 }

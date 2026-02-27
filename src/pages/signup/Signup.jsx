@@ -24,7 +24,7 @@ const Signup = () => {
     try {
 
 
-      const response = await axios.post("https://testserver-1-v7a4.onrender.com/user", {
+      const response = await axios.post("https://testserver-1-v7a4.onrender.com/registor", {
         name: name,
         email: Email,
         password: Password
