@@ -15,13 +15,13 @@ const Dashboard = () => {
 useEffect(() => {
         const verifyUser = async () => {
             try {
-                // IMPORTANT: Use your actual Render URL here
+             
                 const response = await axios.get("https://test-server-8kf3.vercel.app/getUser", {
                     withCredentials: true
                 });
 
                 if (response.data.success) {
-                    setUser(response.data.user); // Store the "dhiraj" data
+                    setUser(response.data.user); 
                     setLoading(false);
                 }
             } catch (error) {
