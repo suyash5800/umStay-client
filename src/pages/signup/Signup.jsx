@@ -1,60 +1,60 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate }  from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
-const Signup=()=>{
- const[Name, setName]=useState("");
- const[Email, setEmail]=useState("");
- const[Phone, setPhone]=useState("");
- const[Password, setPassword]=useState("");
- const [Confrimpass ,setConfrimpass]=useState(""); 
- const [Error, setError]=useState("");
+const Signup = () => {
+  const [name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Confrimpass, setConfrimpass] = useState("");
+  const [Error, setError] = useState("");
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
- const handlesubtmit=async (e)=>{
-  e.preventDefault();
+  const handlesubtmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-  if(Password !== Confrimpass){alert("Password and Confirm Password do not match!"); return;}
+    if (Password !== Confrimpass) { setError("Password and Confirm Password do not match!"); return; }
 
-  try {
-   
-
-   const response = await axios.post("https://testserver-1-v7a4.onrender.com/user", {
-    name: Name,
-    email: Email,
-    password: Password,
-     phone: Phone
-});
+    try {
 
 
-       if (response.status === 201) {
-                alert("Signup successful! You can now log in.");
-                 navigate("/");
-            }
-    console.log(response.data);
-   
+      const response = await axios.post("https://um-stay-client.vercel.app/User", {
+        name: name,
+        email: Email,
+        password: Password
+      });
 
 
-    
-  } catch (error) {
-     console.error("Signup error:", error);
-     setError(error.response?.data?.error || "Signup failed");
-    
+      if (response.status === 201 || response.status==200) {
+        alert("Signup successful! You can now log in.");
+        navigate("/");
+      }
+      console.log(response.data);
+
+
+
+
+    } catch (error) {
+      console.error("Signup error:", error);
+      setError(error.response?.data?.message );
+
+    }
   }
- }
- 
-
- 
 
 
 
 
-    return(
-       <div className="Container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
+
+
+
+  return (
+    <div className="Container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
       <div className="row w-100">
 
         {/* LEFT SIDE */}
@@ -76,7 +76,7 @@ const Signup=()=>{
                 Create Account
               </h2>
 
-              <form  onSubmit={handlesubtmit}>
+              <form onSubmit={handlesubtmit}>
 
                 {/* Full Name */}
                 <div className="mb-3">
@@ -85,8 +85,8 @@ const Signup=()=>{
                     type="text"
                     className="form-control"
                     placeholder="Enter your name"
-                    value={Name}
-                    onChange={(e)=>setName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -99,7 +99,7 @@ const Signup=()=>{
                     className="form-control"
                     placeholder="Enter your email"
                     value={Email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -112,7 +112,7 @@ const Signup=()=>{
                     className="form-control"
                     placeholder="Enter your phone number"
                     value={Phone}
-                    onChange={(e)=>setPhone(e.target.value)}
+                    onChange={(e) => setPhone(e.target.value)}
                     required
                   />
                 </div>
@@ -125,7 +125,7 @@ const Signup=()=>{
                     className="form-control"
                     placeholder="Create a password"
                     value={Password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -138,14 +138,14 @@ const Signup=()=>{
                     className="form-control"
                     placeholder="Confirm password"
                     value={Confrimpass}
-                    onChange={(e)=>setConfrimpass(e.target.value)}
+                    onChange={(e) => setConfrimpass(e.target.value)}
                     required
                   />
                 </div>
 
                 {/* Terms */}
                 <div className="form-check mb-3">
-                  <input className="form-check-input" type="checkbox"/>
+                  <input className="form-check-input" type="checkbox" />
                   <label className="form-check-label">
                     I agree to the Terms & Conditions
                   </label>
@@ -173,7 +173,7 @@ const Signup=()=>{
 
       </div>
     </div>
-    )
+  )
 }
 
 export default Signup;
