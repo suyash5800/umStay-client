@@ -24,7 +24,7 @@ const Signup = () => {
     try {
 
 
-      const response = await axios.post("https://testserver-1-v7a4.onrender.com/registor", {
+      const response = await axios.post("https://test-server-8kf3.vercel.app/registor", {
         name: name,
         email: Email,
         password: Password

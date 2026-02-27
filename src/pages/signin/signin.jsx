@@ -17,7 +17,7 @@ const Signin = () => {
         console.log("button hit ");
         try {
 
-            const response = await axios.post(`https://testserver-1-v7a4.onrender.com/login`, { email, password }, { withCredentials: true });
+            const response = await axios.post(`https://test-server-8kf3.vercel.app/login`, { email, password }, { withCredentials: true });
             if (response.data.success) {
                 console.log("successfully login");
                 navigate("/dashboard");
