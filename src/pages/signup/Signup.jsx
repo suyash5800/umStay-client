@@ -24,7 +24,7 @@ const Signup = () => {
     try {
 
 
-      const response = await axios.post("https://um-stay-client.vercel.app/User", {
+      const response = await axios.post("https://testserver-1-v7a4.onrender.com/user", {
         name: name,
         email: Email,
         password: Password
