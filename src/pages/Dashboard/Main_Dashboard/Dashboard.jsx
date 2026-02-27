@@ -1,5 +1,6 @@
 import Nav from "../Header/Nav";
 import Sidebar from "../Sidebar/Sidebar";
+import axios from "axios";
 import "./dashboard.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,21 +9,23 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [showSidebar, setShowSidebar] = useState(false);
+    const [user, setUser] = useState(null);
 
 
-    useEffect(() => {
+useEffect(() => {
         const verifyUser = async () => {
             try {
+                // IMPORTANT: Use your actual Render URL here
                 const response = await axios.get("https://test-server-8kf3.vercel.app/getUser", {
                     withCredentials: true
                 });
 
                 if (response.data.success) {
+                    setUser(response.data.user); // Store the "dhiraj" data
                     setLoading(false);
                 }
             } catch (error) {
-                console.log("catch from dash");
-              
+                console.log("Session expired or invalid token");
                 navigate("/");
             }
         };
