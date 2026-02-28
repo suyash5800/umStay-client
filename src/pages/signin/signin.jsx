@@ -17,7 +17,7 @@ const Signin = () => {
 
                 if (token) navigate("/dashboard");
      
-    }, [navigate]);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ const Signin = () => {
         console.log("button hit ");
         try {
 
-            const response = await axios.post(`https://test-server-8kf3.vercel.app/login`, { email, password }, { withCredentials: true });
+            const response = await axios.post(`https://test-server-8kf3.vercel.app/login`, { email, password });
             if (response.data.success) {
                 localStorage.setItem("token", response.data.token);
                 console.log("successfully login");
