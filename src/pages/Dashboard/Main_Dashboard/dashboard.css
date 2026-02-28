@@ -13,46 +13,86 @@
     z-index: 1000;
 }
 
-/* Mobile View for Sidebar (Drawer Mode) */
+/* --- Added: Soft Badge Styles --- */
+/* These give that modern "pills" look instead of solid blocks */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.bg-success-soft {
+    background-color: #e1f6eb !important;
+    color: #28a745 !important;
+}
+
+.bg-primary-soft {
+    background-color: #e7f0ff !important;
+    color: #007bff !important;
+}
+
+.bg-warning-soft {
+    background-color: #fff4e1 !important;
+    color: #ffc107 !important;
+}
+
+/* --- Enhanced Sidebar Mobile View --- */
 @media (max-width: 991.98px) {
     .sidebar-aside {
         position: fixed;
         top: 0;
         left: 0;
         height: 100vh;
-        transform: translateX(-100%); /* Start hidden off-screen */
+        transform: translateX(-100%);
         z-index: 2000;
         box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
     }
 
     .sidebar-aside.show {
-        transform: translateX(0); /* Slide in */
+        transform: translateX(0);
     }
 
-    /* Dark background overlay */
     .sidebar-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
         z-index: 1500;
     }
 }
 
-/* Card Enhancements */
+/* Card & UI Enhancements */
 .rounded-4 {
     border-radius: 16px !important;
 }
 
-.main-viewport {
-    min-width: 0; /* Prevents layout break on mobile */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Custom Scrollbar for Sidebar */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}
+
+.main-viewport {
+    min-width: 0; 
+}
+
+/* Custom Scrollbar */
 .sidebar-inner-content {
     height: 100%;
     overflow-y: auto;
+}
+
+.sidebar-inner-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-inner-content::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
 }
