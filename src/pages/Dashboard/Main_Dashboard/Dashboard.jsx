@@ -26,6 +26,7 @@ useEffect(() => {
                 }
             } catch (error) {
                 console.log("Session expired or invalid token");
+                alert("catch block activte");
                 navigate("/");
             }
         };
