@@ -27,7 +27,7 @@ const Dashboard = () => {
                     }
                 );
 
-                if (response.data.success) {
+                if (response.token.success) {
                     setUser(response.data.user);
                     setLoading(false);
                 }
