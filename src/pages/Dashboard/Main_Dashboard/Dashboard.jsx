@@ -14,12 +14,16 @@ const Dashboard = () => {
     useEffect(() => {
         const verifyUser = async () => {
             try {
-                // Using the Render URL we fixed earlier
-                const response = await axios.get(
-                    "https://testserver-1-v7a4.onrender.com/getUser",
-                    { withCredentials: true }
-                );
+                const token = localStorage.getItem("token");
 
+                const response = await axios.get(
+                    "https://test-server-8kf3.vercel.app/getUser",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
                 if (response.data.success) {
                     setUser(response.data.user);
                     setLoading(false);
