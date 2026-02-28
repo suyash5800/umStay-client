@@ -34,6 +34,7 @@ const Dashboard = () => {
             } catch (error) {
                 console.log("Session expired or invalid token");
                 alert("catch block activte");
+                setLoading(false);
                 navigate("/");
             }
         };
@@ -43,7 +44,7 @@ const Dashboard = () => {
     if (loading) {
         return (
             <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-                <div className="spinner-border text-primary" role="status">5800000000</div>
+                <div className="spinner-border text-primary" role="status"></div>
             </div>
         );
     }
