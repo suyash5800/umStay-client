@@ -7,47 +7,47 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [showSidebar, setShowSidebar] = useState(false);
     const [user, setUser] = useState(null);
 
 
-    // useEffect(() => {
-    //     const verifyUser = async () => {
-    //         try {
+    useEffect(() => {
+        const verifyUser = async () => {
+            try {
 
-    //             const token = localStorage.getItem("token");
+                const token = localStorage.getItem("token");
 
-    //             // const response = await axios.get(
-    //             //     "https://test-server-8kf3.vercel.app/getUser",
-    //             //     {
-    //             //         headers: {
-    //             //             Authorization: `Bearer ${token}`
-    //             //         }
-    //             //     }
-    //             // );
+                const response = await axios.get(
+                    "https://test-server-8kf3.vercel.app/getUser",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
 
-    //             // if (response.data.success) {
-    //             //     setUser(response.data.user);
-    //             //     setLoading(false);
-    //             // }
-    //         } catch (error) {
-    //             console.log("Session expired or invalid token");
-    //             alert("catch block activte");
-    //             setLoading(false);
-    //           //  navigate("/");
-    //         }
-    //     };
-    //     verifyUser();
-    // }, [navigate]);
+                if (response.data.success) {
+                    setUser(response.data.user);
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.log("Session expired or invalid token");
+                alert("catch block activte");
+                setLoading(false);
+                navigate("/");
+            }
+        };
+        verifyUser();
+    }, [navigate]);
 
-    // if (loading) {
-    //     return (
-    //         <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-    //             <div className="spinner-border text-primary" role="status"></div>
-    //         </div>
-    //     );
-    // }
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+                <div className="spinner-border text-primary" role="status"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="dashboard-layout bg-light min-vh-100">
