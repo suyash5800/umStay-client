@@ -18,19 +18,19 @@ const Dashboard = () => {
 
                 const token = localStorage.getItem("token");
 
-                const response = await axios.get(
-                    "https://test-server-8kf3.vercel.app/getUser",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
+                // const response = await axios.get(
+                //     "https://test-server-8kf3.vercel.app/getUser",
+                //     {
+                //         headers: {
+                //             Authorization: `Bearer ${token}`
+                //         }
+                //     }
+                // );
 
-                if (response.token.success) {
-                    setUser(response.data.user);
-                    setLoading(false);
-                }
+                // if (response.data.success) {
+                //     setUser(response.data.user);
+                //     setLoading(false);
+                // }
             } catch (error) {
                 console.log("Session expired or invalid token");
                 alert("catch block activte");
