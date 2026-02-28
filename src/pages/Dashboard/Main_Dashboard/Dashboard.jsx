@@ -35,7 +35,7 @@ const Dashboard = () => {
                 console.log("Session expired or invalid token");
                 alert("catch block activte");
                 setLoading(false);
-                navigate("/");
+              //  navigate("/");
             }
         };
         verifyUser();
