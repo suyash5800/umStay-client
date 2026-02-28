@@ -16,9 +16,9 @@ const Signin = () => {
             try {
                 const res = await axios.post("/login", data);
 
-                localStorage.setItem("token", res.data.token);
+                const token =localStorage.getItem("token", res.data.token);
 
-                if (res.data.success) navigate("/dashboard");
+                if (token) navigate("/dashboard");
 
             } catch (error) {
                 console.log("User not authenticated");
