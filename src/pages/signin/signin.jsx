@@ -12,21 +12,12 @@ const Signin = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const autoCheck = async () => {
-            try {
-                const res = await axios.post("/login", data);
-
-                const token =localStorage.getItem("token", res.data.token);
+        
+                const token =localStorage.getItem("token");
 
                 if (token) navigate("/dashboard");
-
-            } catch (error) {
-                console.log("User not authenticated");
-
-            }
-        };
-        autoCheck();
-    }, []);
+     
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
