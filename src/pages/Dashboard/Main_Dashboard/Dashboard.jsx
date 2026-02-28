@@ -7,39 +7,39 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [showSidebar, setShowSidebar] = useState(false);
     const [user, setUser] = useState(null);
 
 
-    useEffect(() => {
-        const verifyUser = async () => {
-            try {
+    // useEffect(() => {
+    //     const verifyUser = async () => {
+    //         try {
 
-                const token = localStorage.getItem("token");
+    //             const token = localStorage.getItem("token");
 
-                // const response = await axios.get(
-                //     "https://test-server-8kf3.vercel.app/getUser",
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`
-                //         }
-                //     }
-                // );
+    //             // const response = await axios.get(
+    //             //     "https://test-server-8kf3.vercel.app/getUser",
+    //             //     {
+    //             //         headers: {
+    //             //             Authorization: `Bearer ${token}`
+    //             //         }
+    //             //     }
+    //             // );
 
-                // if (response.data.success) {
-                //     setUser(response.data.user);
-                //     setLoading(false);
-                // }
-            } catch (error) {
-                console.log("Session expired or invalid token");
-                alert("catch block activte");
-                setLoading(false);
-              //  navigate("/");
-            }
-        };
-        verifyUser();
-    }, [navigate]);
+    //             // if (response.data.success) {
+    //             //     setUser(response.data.user);
+    //             //     setLoading(false);
+    //             // }
+    //         } catch (error) {
+    //             console.log("Session expired or invalid token");
+    //             alert("catch block activte");
+    //             setLoading(false);
+    //           //  navigate("/");
+    //         }
+    //     };
+    //     verifyUser();
+    // }, [navigate]);
 
     if (loading) {
         return (
