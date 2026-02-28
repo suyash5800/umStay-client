@@ -11,13 +11,13 @@ const Signin = () => {
     const [loading, setloading] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    // useEffect(() => {
         
-                const token =localStorage.getItem("token");
+    //             const token =localStorage.getItem("token");
 
-                if (token) navigate("/dashboard");
+    //             if (token) navigate("/dashboard");
      
-    }, []);
+    // }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
