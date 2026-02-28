@@ -1,77 +1,98 @@
-/* Color Variables */
-:root {
-    --bg-main: #f4f7fe;
-    --sidebar-bg: #ffffff;
-    --primary-blue: #4361ee;
-    --text-dark: #2b3674;
-    --text-muted: #a3aed0;
-    --card-shadow: 0px 18px 40px rgba(112, 144, 176, 0.12);
+/* Layout Basics */
+.dashboard-layout {
+    overflow-x: hidden;
 }
 
-body {
-    background-color: var(--bg-main);
-    color: var(--text-dark);
-    font-family: 'DM Sans', sans-serif;
-}
-
-/* Sidebar - Modern & Slim */
+/* Sidebar Styling */
 .sidebar-aside {
-    width: 280px;
-    background: var(--sidebar-bg);
-    border: none;
-    box-shadow: var(--card-shadow);
-    margin: 20px;
-    border-radius: 20px;
-    height: calc(100vh - 40px);
+    width: 260px;
+    background: #ffffff;
+    border-right: 1px solid #dee2e6;
+    min-height: calc(100vh - 60px);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
 }
 
-/* Modern Cards */
+/* --- Added: Soft Badge Styles --- */
+/* These give that modern "pills" look instead of solid blocks */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.bg-success-soft {
+    background-color: #e1f6eb !important;
+    color: #28a745 !important;
+}
+
+.bg-primary-soft {
+    background-color: #e7f0ff !important;
+    color: #007bff !important;
+}
+
+.bg-warning-soft {
+    background-color: #fff4e1 !important;
+    color: #ffc107 !important;
+}
+
+/* --- Enhanced Sidebar Mobile View --- */
+@media (max-width: 991.98px) {
+    .sidebar-aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        z-index: 2000;
+        box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-aside.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 1500;
+    }
+}
+
+/* Card & UI Enhancements */
+.rounded-4 {
+    border-radius: 16px !important;
+}
+
 .card {
-    background: #ffffff;
-    border: none;
-    border-radius: 20px !important;
-    box-shadow: var(--card-shadow);
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
 }
 
-/* Soft Badges */
-.bg-success-soft {
-    background-color: #d1fadf !important;
-    color: #027a48 !important;
-    border-radius: 12px;
+.main-viewport {
+    min-width: 0; 
 }
 
-.bg-primary-soft {
-    background-color: #e0e7ff !important;
-    color: #4338ca !important;
-    border-radius: 12px;
+/* Custom Scrollbar */
+.sidebar-inner-content {
+    height: 100%;
+    overflow-y: auto;
 }
 
-/* Welcome Text Styling */
-h1, h2, h3 {
-    color: var(--text-dark);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+.sidebar-inner-content::-webkit-scrollbar {
+    width: 5px;
 }
 
-.text-muted {
-    color: var(--text-muted) !important;
-}
-
-/* Tables */
-.table thead th {
-    background-color: transparent;
-    border-bottom: 1px solid #f1f1f1;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-.table tbody td {
-    border: none;
-    padding: 15px 10px;
+.sidebar-inner-content::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
 }
