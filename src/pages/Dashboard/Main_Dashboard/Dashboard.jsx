@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Nav from "../Header/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import axios from "axios";
 import "./dashboard.css";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -11,14 +11,12 @@ const Dashboard = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [user, setUser] = useState(null);
 
-
     useEffect(() => {
         const verifyUser = async () => {
             try {
-
                 const token = localStorage.getItem("token");
-                if(token)console.log(token);
-
+                
+                // Fetching from your Vercel backend using Bearer Token
                 const response = await axios.get(
                     "https://test-server-8kf3.vercel.app/getUser",
                     {
@@ -30,12 +28,10 @@ const Dashboard = () => {
 
                 if (response.data.success) {
                     setUser(response.data.user);
-                    console.log("response set");
                     setLoading(false);
                 }
             } catch (error) {
                 console.log("Session expired or invalid token");
-                alert("catch block activte");
                 setLoading(false);
                 navigate("/");
             }
@@ -53,7 +49,7 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-layout bg-light min-vh-100">
-            {/* 1. Mobile Overlay: Tapping this closes the sidebar */}
+            {/* Mobile Overlay: Appears when sidebar is open on phone */}
             {showSidebar && (
                 <div
                     className="sidebar-overlay d-lg-none"
@@ -61,7 +57,7 @@ const Dashboard = () => {
                 ></div>
             )}
 
-            {/* 2. Top Navigation Bar */}
+            {/* Top Navigation Bar */}
             <header className="navbar-top bg-white shadow-sm sticky-top">
                 <div className="container-fluid d-flex align-items-center py-2 px-3">
                     <button
@@ -77,9 +73,8 @@ const Dashboard = () => {
             </header>
 
             <div className="d-flex">
-                {/* 3. Sidebar: Slides in from left on mobile */}
+                {/* Sidebar: Dynamic class 'show' for mobile toggle */}
                 <aside className={`sidebar-aside ${showSidebar ? "show" : ""}`}>
-                    {/* Close Button inside Sidebar (Mobile only) */}
                     <div className="d-flex justify-content-between align-items-center d-lg-none p-3 border-bottom">
                         <span className="fw-bold">Menu</span>
                         <button
@@ -93,17 +88,19 @@ const Dashboard = () => {
                     </div>
                 </aside>
 
-                {/* 4. Main Dashboard Content */}
+                {/* Main Content */}
                 <main className="main-viewport flex-grow-1 p-3 p-md-4">
                     <div className="container-fluid">
                         <div className="row mb-4">
                             <div className="col">
-                                <h3 className="fw-bold text-dark">Welcome Back, ${user.name}</h3>
+                                <h3 className="fw-bold text-dark">
+                                    Welcome Back, {user?.name}!
+                                </h3>
                                 <p className="text-muted">Here is what's happening today.</p>
                             </div>
                         </div>
 
-                        {/* Responsive Info Cards */}
+                        {/* Info Cards */}
                         <div className="row g-3">
                             <div className="col-12 col-sm-6 col-md-4">
                                 <div className="card border-0 shadow-sm p-3 rounded-4 bg-primary text-white">
@@ -125,7 +122,7 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        {/* Recent Activity Table/List */}
+                        {/* Recent Activity */}
                         <div className="row mt-4">
                             <div className="col-12">
                                 <div className="card border-0 shadow-sm rounded-4">
@@ -139,8 +136,8 @@ const Dashboard = () => {
                                                 <div key={item} className="p-3 border-bottom d-flex align-items-center">
                                                     <div className="rounded-circle bg-light p-2 me-3">📁</div>
                                                     <div>
-                                                        <p className="mb-0 small fw-bold">New deployment to Render</p>
-                                                        <small className="text-muted">Success • 15 mins ago</small>
+                                                        <p className="mb-0 small fw-bold">System log check</p>
+                                                        <small className="text-muted">Success • {item}h ago</small>
                                                     </div>
                                                 </div>
                                             ))}
