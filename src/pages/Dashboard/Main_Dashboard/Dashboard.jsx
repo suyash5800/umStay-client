@@ -17,6 +17,7 @@ const Dashboard = () => {
             try {
 
                 const token = localStorage.getItem("token");
+                if(token)console.log(token);
 
                 const response = await axios.get(
                     "https://test-server-8kf3.vercel.app/getUser",
@@ -29,6 +30,7 @@ const Dashboard = () => {
 
                 if (response.data.success) {
                     setUser(response.data.user);
+                    console.log("response set");
                     setLoading(false);
                 }
             } catch (error) {

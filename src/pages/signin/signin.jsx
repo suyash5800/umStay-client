@@ -11,13 +11,21 @@ const Signin = () => {
     const [loading, setloading] = useState(false);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-        
-    //             const token =localStorage.getItem("token");
+    useEffect(() => {
+        const autolog=()=>{
+              const tokenn = localStorage.getItem("token");
 
-    //             if (token) navigate("/dashboard");
-     
-    // }, []);
+
+        if (tokenn) {
+            console.log("moving dash and loop "); 
+            navigate("/dashboard");
+        }
+        };
+         autolog();
+
+      
+
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
