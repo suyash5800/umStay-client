@@ -5,11 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Nav = () => {
   const navigate = useNavigate();
   const logout = (res, req) => {
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none"
-    });
+    localStorage.removeItem("token");
     res.status(200).json({ success: true, message: "Logout successfull " });
 
     navigate("/");
