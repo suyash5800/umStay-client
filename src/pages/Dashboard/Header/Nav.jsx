@@ -1,12 +1,12 @@
-import { message } from "antd";
+
 import "./Nav.css";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const navigate = useNavigate();
-  const logout = (res, req) => {
+  const logout = () => {
     localStorage.removeItem("token");
-    res.status(200).json({ success: true, message: "Logout successfull " });
+    
 
     navigate("/");
   }
