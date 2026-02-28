@@ -12,16 +12,23 @@ const Dashboard = () => {
     const [user, setUser] = useState(null);
 
 
-useEffect(() => {
+    useEffect(() => {
         const verifyUser = async () => {
             try {
-             
-                const response = await axios.get("https://test-server-8kf3.vercel.app/getUser", {
-                    withCredentials: true
-                });
+
+                const token = localStorage.getItem("token");
+
+                const response = await axios.get(
+                    "https://test-server-8kf3.vercel.app/getUser",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
 
                 if (response.data.success) {
-                    setUser(response.data.user); 
+                    setUser(response.data.user);
                     setLoading(false);
                 }
             } catch (error) {
