@@ -58,7 +58,7 @@ const Dashboard = () => {
             </video>
             <div className="container d-flex justify-content-center align-items-center h-100 text-white">
                 <div className="text-center">
-                    <h1 className="display-3">hello</h1>
+                    <h1 className="display-3 text-balck">hello</h1>
                 </div>
 
 
