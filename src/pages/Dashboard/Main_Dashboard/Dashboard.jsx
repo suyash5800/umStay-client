@@ -49,9 +49,13 @@ const Dashboard = () => {
 
     return (
         <div className="container-fluid bg-danger">
-            <h1>hello
-                
-            </h1>
+            <div className="container bg-black">
+                 <h1>hello</h1>
+
+            </div>
+           
+
+            
         </div>
     );
 };
