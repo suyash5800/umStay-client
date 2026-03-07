@@ -56,9 +56,9 @@ const Dashboard = () => {
                 <source src="https://youtu.be/Abk7L9zmbG4?si=OcAnqG7poEQrNX5J" type="vide/mp4" />
 
             </video>
-            <div className="container d-flex justify-content-center align-items-center h-100 text-white">
+            <div className="container d-flex justify-content-center align-items-center h-100 text-black">
                 <div className="text-center">
-                    <h1 className="display-3 text-balck">hello</h1>
+                    <h1 className="display-3">hello</h1>
                 </div>
 
 
