@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import Nav from "../Header/Nav";
@@ -15,7 +15,7 @@ const Dashboard = () => {
         const verifyUser = async () => {
             try {
                 const token = localStorage.getItem("token");
-                
+
                 // Fetching from your Vercel backend using Bearer Token
                 const response = await axios.get(
                     "https://test-server-8kf3.vercel.app/getUser",
@@ -48,14 +48,24 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="container-fluid bg-danger">
-            <div className="container bg-black">
-                 <h1>hello</h1>
+        <div className="container-fluid positon-relative vh-100 overflow-hidden">
+            <video autoPlay muted loop
+                className="w-100 h-100 position-absolute top-0 start-0"
+                style={{ objectFit: "cover", zIndex: -1 }}
+            >
+                <source src="https://youtu.be/Abk7L9zmbG4?si=OcAnqG7poEQrNX5J" type="vide/mp4" />
+
+            </video>
+            <div className="container d-flex justify-content-center align-items-center h-100 text-white">
+                <div className="text-center">
+                    <h1 className="display-3">hello</h1>
+                </div>
+
 
             </div>
-           
 
-            
+
+
         </div>
     );
 };
