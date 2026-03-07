@@ -48,7 +48,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="container-fluid positon-relative vh-100 overflow-hidden">
+        <div className="container-fluid positon-relative vh-100 overflow-hidden" style={{backgroundColor: 'blue' , opacity: 0.5}}>
             <video autoPlay muted loop
                 className="w-100 h-100 position-absolute top-0 start-0"
                 style={{ objectFit: "cover", zIndex: -1 }}
@@ -58,7 +58,7 @@ const Dashboard = () => {
             </video>
             <div className="container d-flex justify-content-center align-items-center h-100 text-black">
                 <div className="text-center">
-                    <h1 className="display-3">hello</h1>
+                    <h1 className="bg-black">hello</h1>
                 </div>
 
 
