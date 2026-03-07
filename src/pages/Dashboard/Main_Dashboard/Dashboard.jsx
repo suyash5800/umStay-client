@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Nav from "../Header/Nav";
+// import Nav from "../Header/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import "./dashboard.css";
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
                         ☰
                     </button>
                     <div className="flex-grow-1">
-                        <Nav />
+                        {/* <Nav /> */}
                     </div>
                 </div>
             </header>
