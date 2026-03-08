@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import Nav from "../Header/Nav";
-import Sidebar from "../Sidebar/Sidebar";
-import "./dashboard.css";
+// import Sidebar from "../Sidebar/Sidebar";
+import roomVideo from "./asstes/rooms.mp4";
+
+// import "./dashboard.css";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -48,17 +50,23 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="container-fluid positon-relative vh-100 overflow-hidden" style={{backgroundColor: 'blue' , opacity: 0.5}}>
+        <div className="container-fluid position-relative vh-100 overflow-hidden " style={{ opacity: 0.8 }} >
             <video autoPlay muted loop
                 className="w-100 h-100 position-absolute top-0 start-0"
                 style={{ objectFit: "cover", zIndex: -1 }}
             >
-                <source src="https://youtu.be/Abk7L9zmbG4?si=OcAnqG7poEQrNX5J" type="vide/mp4" />
+                <source src={roomVideo} type="video/mp4" />
 
             </video>
-            <div className="container d-flex justify-content-center align-items-center h-100 text-black">
-                <div className="text-center">
-                    <h1 className="bg-black">hello</h1>
+            <div className="container" >
+                <div className="row w-100 fs-5 text-black m-1">
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xl-6 col-12 d-flex flex-column flex-lg-row ">
+                        <div className="mx-2 "><i class="bi bi-envelope-at-fill text-black"></i> Suyapatil5800@gmail.com</div>
+                        <div><i class="bi bi-phone-fill "></i> +919860915800</div>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-12  col-xl-6  ">hibro</div>
+
+
                 </div>
 
 
