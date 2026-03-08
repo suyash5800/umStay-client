@@ -50,19 +50,20 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="container-fluid position-relative vh-100 overflow-hidden " style={{ opacity: 0.8 }} >
-            <video autoPlay muted loop
+        <div className="container-fluid position-relative vh-100 overflow-hidden p-0 m-0"  >
+            <video autoPlay muted loop  playsInline
                 className="w-100 h-100 position-absolute top-0 start-0"
-                style={{ objectFit: "cover", zIndex: -1 }}
+                style={{ objectFit: "cover", zIndex: -2 }}
             >
                 <source src={roomVideo} type="video/mp4" />
 
             </video>
-            <div className="container" >
-                <div className="row w-100 fs-5 text-black m-1">
+            <div className="position-absolute top-0 start-0 w-100 h-100"  style={{ backgroundColor: "rgba(22, 37, 136, 0.35)", zIndex: -1 }}></div> 
+            <div className="container-fluid position-relative top-0 text-white vh-100  " style={{zIndex:1}} >
+                <div className="row w-100 fs-5 text-white m-1 z-5">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xl-6 col-12 d-flex flex-column flex-lg-row ">
-                        <div className="mx-2 "><i class="bi bi-envelope-at-fill text-black"></i> Suyapatil5800@gmail.com</div>
-                        <div><i class="bi bi-phone-fill "></i> +919860915800</div>
+                        <div className=" "><i class="bi bi-envelope-at-fill "></i> Suyapatil5800@gmail.com</div>
+                        <div><i className="bi bi-phone-fill "></i> +919860915800</div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-12  col-xl-6  ">hibro</div>
 
