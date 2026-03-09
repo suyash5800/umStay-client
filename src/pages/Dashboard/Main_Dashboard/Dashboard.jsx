@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import Nav from "../Header/Nav";
+ import Nav from "../Header/Nav";
 // import Sidebar from "../Sidebar/Sidebar";
 import roomVideo from "./asstes/rooms.mp4";
 
@@ -51,24 +51,30 @@ const Dashboard = () => {
 
     return (
         <div className="container-fluid position-relative vh-100 overflow-hidden p-0 m-0"  >
-            <video autoPlay muted loop  playsInline
+            <video autoPlay muted loop playsInline
                 className="w-100 h-100 position-absolute top-0 start-0"
                 style={{ objectFit: "cover", zIndex: -2 }}
             >
                 <source src={roomVideo} type="video/mp4" />
 
             </video>
-            <div className="position-absolute top-0 start-0 w-100 h-100"  style={{ backgroundColor: "rgba(22, 37, 136, 0.35)", zIndex: -1 }}></div> 
-            <div className="container-fluid position-relative top-0 text-white vh-100  " style={{zIndex:1}} >
-                <div className="row w-100 fs-5 text-white m-1 z-5">
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-xl-6 col-12 d-flex flex-column flex-lg-row ">
-                        <div className=" "><i class="bi bi-envelope-at-fill "></i> Suyapatil5800@gmail.com</div>
+            <div className="position-absolute top-0 start-0 w-100 h-100" style={{ backgroundColor: "rgba(22, 37, 136, 0.35)", zIndex: -1 }}></div>
+            <div className="container-fluid position-relative top-0 text-white vh-100  " style={{ zIndex: 1 }} >
+                <div className="row w-100 fs-5 text-white m-1 z-5 justify-content-between d-none d-md-flex ">
+                    <div className="col-xl-6  col-lg-6 col-md-8 col-sm-12  col-12 d-flex flex-column flex-md-row flex-lg-row ">
+                        <div className="me-3"><i class="bi bi-envelope-at-fill "></i> Suyapatil5800@gmail.com</div>
                         <div><i className="bi bi-phone-fill "></i> +919860915800</div>
                     </div>
-                    <div className="col-lg-6 col-md-6 col-sm-12 col-12  col-xl-6  ">hibro</div>
+                    <div className=" col-xl-2  col-lg-5 col-md-4 col-sm-12 col-12 justify-content-between  ">
+                        <i className="bi mx-3 bi-facebook"></i>
+                        <i className="bi mx-3 bi-instagram"></i>
+                        <i className="bi mx-3 bi-twitter-x"></i>
+                        <i className="bi mx-3 bi-google"></i>
+                    </div>
 
 
                 </div>
+                <div className="row"> <Nav/></div>
 
 
             </div>

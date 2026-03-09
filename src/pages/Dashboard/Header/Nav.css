@@ -1,34 +1,13 @@
-.navbar-custom {
-    background-color: #111827;
-    border-bottom: 1px solid #2A2A2A;
-    padding: 10px 20px;
+.cusBorder{
+    border-block: solid 1px rgb(163, 173, 192);
+    
 }
-
-.logo-style {
-    color: #E5E7EB;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+.logout{
+    background-color: rgb(255, 255, 255);
+    color: rgb(55, 58, 157);
 }
+.logout:hover{
+    background-color: rgb(204, 64, 64);
+    
 
-.scearch-bar {
-    background-color: #1F2937;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 12px;
-
-}
-
-.scearch-bar:hover {
-    background-color: #374151;
-}
-
-.profile-style {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #374151;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 }

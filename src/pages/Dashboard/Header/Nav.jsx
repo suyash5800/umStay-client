@@ -1,77 +1,54 @@
+import { useNavigate } from "react-router-dom";
+import umlogo from "/src/assets/FullLogo_Transparent_NoBuffer.png";
+import "./Nav.css";
 
-// import "./Nav.css";
-// import { useNavigate } from "react-router-dom";
+const Nav = () => {
 
-// const Nav = () => {
-//   const navigate = useNavigate();
-//   const logout = () => {
-//     localStorage.removeItem("token");
-    
+    const navigate = useNavigate();
 
-//     navigate("/");
-//   }
-//   return (
-//     <nav
-//       className="navbar navbar-custom navbar-expand-lg sticky-top"
-//     >
-//       <div className="container-fluid">
+    const logout = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+    };
 
-//         <a
-//           className="navbar-brand logo-style"
-//           href="#"
+    return (
+        <nav className="navbar navbar-expand-lg navbar-dark bg-transparent px-4 cusBorder">
 
-//         >
-//           AdminPanel
-//         </a>
-//         <a className="btn btn-danger " onClick={logout}> Logout</a>
+            {/* Logo */}
+            <a className="navbar-brand" href="#">
+                <img src={umlogo} height="50" alt="logo"/>
+            </a>
 
+            {/* Mobile Toggle */}
+            <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+            >
+                <span className="navbar-toggler-icon"></span>
+            </button>
 
-//         <button
-//           className="navbar-toggler"
-//           type="button"
-//           data-bs-toggle="collapse"
-//           data-bs-target="#navbarNav"
-//           style={{ backgroundColor: "#374151" }}
-//         >
-//           <span className="navbar-toggler-icon"></span>
-//         </button>
+            {/* Menu */}
+            <div className="collapse navbar-collapse" id="navbarContent">
 
-//         {/* Right Side */}
-//         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-//           <ul className="navbar-nav align-items-center gap-lg-3">
+                {/* Left Links */}
+                <ul className="navbar-nav me-auto">
+                    <li className="nav-item"><a className="nav-link">Home</a></li>
+                    <li className="nav-item"><a className="nav-link">Rooms</a></li>
+                    <li className="nav-item"><a className="nav-link">Article</a></li>
+                    <li className="nav-item"><a className="nav-link">ContactUs</a></li>
+                    <li className="nav-item"><a className="nav-link">AboutUs</a></li>
+                </ul>
 
+                {/* Right Side */}
+                <button className="btn logout" onClick={logout}>
+                    Logout
+                </button>
 
-//             <li className="nav-item d-none d-lg-block">
-//               <input
-//                 type="text"
-//                 placeholder="Search..."
-//                 className=" scearch-bar"
-//               />
-//             </li>
+            </div>
+        </nav>
+    );
+};
 
-//             <li className="nav-item">
-//               <span
-//                 className="nav-link cursor-pointer"
-//                 style={{ color: "#9CA3AF" }}
-//               >
-//                 🔔
-//               </span>
-//             </li>
-
-//             {/* Profile */}
-//             <li className="nav-item">
-//               <div
-//                 className="d-flex justify-content-center align-items-center profile-style"
-
-//               >
-//                 U
-//               </div>
-//             </li>
-
-//           </ul>
-//         </div>
-//       </div>
-//     </nav>
-//   )
-// }
-// export default Nav;
+export default Nav;
