@@ -12,18 +12,29 @@ const Signin = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const autolog=()=>{
-              const tokenn = localStorage.getItem("token");
+        const autolog = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+            try {
+                const res = await axios.get("https://test-server-8kf3.vercel.app/getUser",
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    });
 
-
-        if (tokenn) {
-            console.log("moving dash and loop "); 
-            navigate("/dashboard");
-        }
+                    if(res.data.success){
+                        navigate("/dashboard");
+                    }
+                
+            } catch (error) {
+                 localStorage.removeItem("token"); 
+                
+            }
         };
-         autolog();
+        autolog();
 
-      
+
 
     }, []);
 
