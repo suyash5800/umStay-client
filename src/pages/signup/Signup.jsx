@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import _default_1 from "antd/es/table/InternalTable";
 
 
 
@@ -14,19 +15,34 @@ const Signup = () => {
   const [Error, setError] = useState("");
   const [otp, setOtp] = useState("");
   const [show, setshow] = useState(false);
+  const [Loading, setLoading] = useState(false);
+  const [Timer, setTimer] = useState(0);
+  const [IntervalId, setIntervalId] = useState(null);
+  const [Emailverified , setEmailverified]=useState(false);
 
   const navigate = useNavigate();
 
   const handlesubtmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setError("");
 
     if (Phone.length != 10) {
+      setLoading(false);
       setError("Enter Your Valid Phone Number ");
+
       return;
     }
 
-    if (Password !== Confrimpass) { setError("Password and Confirm Password do not match!"); return; }
+    if (Password !== Confrimpass) {
+      setLoading(false);
+      setError("Password and Confirm Password do not match!"); return;
+    }
+
+    if(!Emailverified ){
+      setLoading(false);
+      setError("Email not verified");
+    }
 
     try {
 
@@ -49,7 +65,69 @@ const Signup = () => {
 
 
     } catch (error) {
+      setLoading(false);
       console.error("Signup error:", error);
+      setError(error.response?.data?.message);
+
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleOTP = async (e) => {
+
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    if (!Email) {
+      setError("Enter the email ");
+      return;
+    }
+
+    try {
+
+      const response = await axios.post("https://test-server-8kf3.vercel.app/SendEmail", {
+        email: Email
+        //
+      });
+
+
+      alert("Sent OTP , Check your email");
+      setLoading(false);
+
+
+
+
+    } catch (error) {
+      console.log("try block");
+      console.error("OTP faild", error);
+      setError(error.response?.data?.message);
+
+    }
+  }
+
+  const verifyOTp = async () => {
+
+    setError("");
+    try {
+      const response = await axios.post("https://test-server-8kf3.vercel.app/verifyOTP", {
+        email: Email,
+        code: otp
+      });
+
+      if (response.status === 200) {
+        alert("Email Verified!"); 
+        setshow(false);
+        if (IntervalId) clearInterval(IntervalId);
+        setTimer(0);
+        setEmailverified(true);
+      }
+
+
+
+    } catch (error) {
+      setEmailverified(false);
+      console.error("OTP Faild ", error);
       setError(error.response?.data?.message);
 
     }
@@ -87,12 +165,12 @@ const Signup = () => {
               <form onSubmit={handlesubtmit}>
 
                 {/* Full Name */}
-                <div className="mb-3">
-                  <label className="form-label">Full Name</label>
+                <div className="mb-3  ">
+
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter your name"
+                    placeholder="Enter Full your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -100,21 +178,52 @@ const Signup = () => {
                 </div>
 
                 {/* Email */}
-                <div className="mb-3">
-                  <label className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter your email"
-                    value={Email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                <div className="mb-3  ">
+                  <div className="input-group">
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Enter your email"
+                      value={Email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+
+                    />
+
+                    <button className="btn   btn-outline-primary "
+                      type="button"
+                      disabled={!Email}
+                      onClick={async (e) => {
+                        await handleOTP(e);
+                        setshow(true);
+                        setTimer(120);
+
+                        const id = setInterval(() => {
+                          setTimer((prev) => {
+                            if (prev <= 1) {
+                              clearInterval(id);
+                              return 0;
+                            }
+                            return prev - 1;
+                          });
+                        }, 1000);
+                        setIntervalId(id);
+                      }
+
+
+                      }
+
+
+                    >
+                      {!Loading ? 'Verify Email' : 'Verifing Email...'}
+                    </button>
+                  </div>
+
                 </div>
 
                 {/* Phone */}
                 <div className="mb-3">
-                  <label className="form-label">Phone</label>
+
                   <input
                     type="tel"
                     className="form-control"
@@ -127,7 +236,7 @@ const Signup = () => {
 
                 {/* Password */}
                 <div className="mb-3">
-                  <label className="form-label">Password</label>
+
                   <input
                     type="password"
                     className="form-control"
@@ -140,7 +249,7 @@ const Signup = () => {
 
                 {/* Confirm Password */}
                 <div className="mb-3">
-                  <label className="form-label">Confirm Password</label>
+
                   <input
                     type="password"
                     className="form-control"
@@ -160,16 +269,14 @@ const Signup = () => {
                 </div>
 
                 {/* Button */}
-                <button className="btn btn-primary w-100">
-                  Register
+                <button className="btn btn-primary w-100 " type="submit" disabled={Loading}>
+                  {!Loading ? 'Register' : 'sumbmiting...'}
                 </button>
 
                 {Error && <p className="text-danger mt-2">{Error}</p>}
 
               </form>
-              <button className="btn btn-primary w-100 my-1" onClick={() => setshow(true)} >
-                verify email
-              </button>
+
 
               {/* Login Redirect */}
               <p className="text-center mt-3">
@@ -186,20 +293,38 @@ const Signup = () => {
           style={{
             position: "fixed",
             top: 0,
-            left:0,
-            right:0,
-            bottom:0,
-            backgroundColor:'rgba(255, 255, 255, 0.44)',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.44)',
+            zIndex:2,
 
           }}>
           <div className="verfication-window p-4 bg-white shadow round ">
             <h4>Verify your email</h4>
             <p>Enter the code sent to your email.</p>
-            <input type="Number" className="form-control mb-3" placeholder="Enter the OTP " />
+            <input
+              type="Number"
+              className="form-control mb-3"
+              placeholder="Enter the OTP "
+              onChange={(e) => setOtp(e.target.value)}
+            />
+            <p className="text-muted">
+              Time remaining: {Math.floor(Timer / 60)}:{String(Timer % 60).padStart(2, "0")}
+            </p>
+
+
 
             <div className="d-flex gap-2">
-              <button className=" btn  btn-primary w-100">submit </button>
-              <button className="btn  btn-otline-secoundary w-100" onClick={() => setshow(false)}>cancle </button>
+              <button className="btn btn-outline-danger" disabled={Timer}
+                onClick={(e) => {
+                  handleOTP(e);
+                  setTimer(120);
+                  setIntervalId(id);
+
+                }}> resend OTP</button>
+              <button className=" btn  btn-primary w-100" onClick={() => { verifyOTp() }}>submit </button>
+              <button className="btn  btn-outline-primary w-100" onClick={() => setshow(false)}>cancle </button>
             </div>
           </div>
         </div>}
