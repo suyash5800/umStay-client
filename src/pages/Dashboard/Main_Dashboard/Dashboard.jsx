@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Nav from "../Header/Nav";
 // import Sidebar from "../Sidebar/Sidebar";
 import roomVideo from "./asstes/rooms.mp4";
+import findrombox from "../Dashboard_pages/findrombox";
 
 import "./dashboard.css";
 
@@ -95,6 +96,9 @@ const Dashboard = () => {
                 </div>
 
 
+            </div>
+            <div className="container">
+                <findrombox/>
             </div>
 
         </div>

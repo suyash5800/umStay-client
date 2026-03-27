@@ -12,12 +12,19 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [Confrimpass, setConfrimpass] = useState("");
   const [Error, setError] = useState("");
+  const [otp, setOtp] = useState("");
+  const [show, setshow] = useState(false);
 
   const navigate = useNavigate();
 
   const handlesubtmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (Phone.length != 10) {
+      setError("Enter Your Valid Phone Number ");
+      return;
+    }
 
     if (Password !== Confrimpass) { setError("Password and Confirm Password do not match!"); return; }
 
@@ -27,11 +34,12 @@ const Signup = () => {
       const response = await axios.post("https://test-server-8kf3.vercel.app/registor", {
         name: name,
         email: Email,
+        phone: Phone,
         password: Password
       });
 
 
-      if (response.status === 201 || response.status==200) {
+      if (response.status === 201 || response.status == 200) {
         alert("Signup successful! You can now log in.");
         navigate("/");
       }
@@ -42,7 +50,7 @@ const Signup = () => {
 
     } catch (error) {
       console.error("Signup error:", error);
-      setError(error.response?.data?.message );
+      setError(error.response?.data?.message);
 
     }
   }
@@ -155,9 +163,13 @@ const Signup = () => {
                 <button className="btn btn-primary w-100">
                   Register
                 </button>
+
                 {Error && <p className="text-danger mt-2">{Error}</p>}
 
               </form>
+              <button className="btn btn-primary w-100 my-1" onClick={() => setshow(true)} >
+                verify email
+              </button>
 
               {/* Login Redirect */}
               <p className="text-center mt-3">
@@ -170,6 +182,27 @@ const Signup = () => {
             </div>
           </div>
         </div>
+        {show && <div className="container-fluid h-100 d-flex verifacation-overlay justify-content-center align-items-center border rounded "
+          style={{
+            position: "fixed",
+            top: 0,
+            left:0,
+            right:0,
+            bottom:0,
+            backgroundColor:'rgba(255, 255, 255, 0.44)',
+
+          }}>
+          <div className="verfication-window p-4 bg-white shadow round ">
+            <h4>Verify your email</h4>
+            <p>Enter the code sent to your email.</p>
+            <input type="Number" className="form-control mb-3" placeholder="Enter the OTP " />
+
+            <div className="d-flex gap-2">
+              <button className=" btn  btn-primary w-100">submit </button>
+              <button className="btn  btn-otline-secoundary w-100" onClick={() => setshow(false)}>cancle </button>
+            </div>
+          </div>
+        </div>}
 
       </div>
     </div>
