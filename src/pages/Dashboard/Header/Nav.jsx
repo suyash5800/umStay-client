@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import umlogo from "/src/assets/FullLogo_Transparent_NoBuffer.png";
 import "./Nav.css";
 
 const Nav = () => {
-
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
     const logout = () => {
         localStorage.removeItem("token");
         navigate("/");
+    };
+
+    const handleLinkClick = () => {
+        setIsOpen(false);
     };
 
     return (
@@ -23,32 +28,29 @@ const Nav = () => {
             <button
                 className="navbar-toggler"
                 type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarContent"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
             >
                 <span className="navbar-toggler-icon"></span>
             </button>
 
             {/* Menu */}
-            <div className="collapse navbar-collapse" id="navbarContent">
+            <div className={`navbar-collapse ${isOpen ? 'show' : 'collapse'}`}>
 
                 {/* Left Links */}
-                <ul className="navbar-nav ">
-                    <li className="nav-item"><a className="nav-link">Home</a></li>
-                    <li className="nav-item"><a className="nav-link">Rooms</a></li>
-                    <li className="nav-item"><a className="nav-link">Article</a></li>
-                    <li className="nav-item"><a className="nav-link">ContactUs</a></li>
-                    <li className="nav-item"><a className="nav-link">AboutUs</a></li>
+                <ul className="navbar-nav">
+                    <li className="nav-item"><a className="nav-link" onClick={handleLinkClick}>Home</a></li>
+                    <li className="nav-item"><a className="nav-link" onClick={handleLinkClick}>Rooms</a></li>
+                    <li className="nav-item"><a className="nav-link" onClick={handleLinkClick}>Article</a></li>
+                    <li className="nav-item"><a className="nav-link" onClick={handleLinkClick}>ContactUs</a></li>
+                    <li className="nav-item"><a className="nav-link" onClick={handleLinkClick}>AboutUs</a></li>
                 </ul>
 
-                <div className="logout-container  ">
-                    <button className="btn  logout" onClick={logout}>
+                <div className="logout-container">
+                    <button className="btn logout" onClick={() => { logout(); setIsOpen(false); }}>
                         Logout
                     </button>
                 </div>
-
-
-
 
             </div>
 
