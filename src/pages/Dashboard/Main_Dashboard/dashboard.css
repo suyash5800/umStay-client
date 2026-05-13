@@ -1,13 +1,26 @@
+
+.m-font{
+    font-family: 'Poppins', sans-serif;
+}
 .cusbackground{
     background-color: rgba(22,37,136,0.35);
     z-index: -1;
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
 
 
+}
+
+.nav-row {
+    position: fixed;
+    top: 600px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    padding: 0 20px;
 }
 .bcvideo{
     width: 100%;
@@ -16,12 +29,14 @@
     top:0;
     
 }
-.banner-container{
-    height:500px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
+.banner-container {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    padding-top: 100px;
 }
 
 .banner-text{
