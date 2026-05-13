@@ -24,25 +24,51 @@
     display: flex;
     align-items: center;
     width: 100%;
+    justify-content: center;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
 }
 
 /* Center nav links */
 .navbar-nav {
     gap: 10px;
+
 }
 
 /* Make menu perfectly centered */
-@media (min-width: 992px) {
+/* Mobile navbar */
+@media (max-width: 991px) {
+
+    .cusBorder {
+        width: 95%;
+     
+    }
+
+    .navbar-collapse {
+        margin-top: 15px;
+    }
+
     .navbar-nav {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        align-items: center;
+        text-align: center;
+        gap: 6px;
     }
 
     .logout {
-        margin-left: auto;
+        width: 100%;
+        margin-top: 14px;
     }
 }
+/* @media (min-width:425px) {
+    .cusBorder{
+        width: 80%;
+    }
+    
+} */
 
 /* Nav links style */
 .nav-link {

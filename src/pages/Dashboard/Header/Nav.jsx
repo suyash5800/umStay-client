@@ -16,7 +16,7 @@ const Nav = () => {
 
             {/* Logo */}
             <a className="navbar-brand" href="#">
-                <img src={umlogo} height="50" alt="logo"/>
+                <img src={umlogo} height="50" alt="logo" />
             </a>
 
             {/* Mobile Toggle */}
@@ -33,7 +33,7 @@ const Nav = () => {
             <div className="collapse navbar-collapse" id="navbarContent">
 
                 {/* Left Links */}
-                <ul className="navbar-nav me-auto">
+                <ul className="navbar-nav ">
                     <li className="nav-item"><a className="nav-link">Home</a></li>
                     <li className="nav-item"><a className="nav-link">Rooms</a></li>
                     <li className="nav-item"><a className="nav-link">Article</a></li>
@@ -41,12 +41,17 @@ const Nav = () => {
                     <li className="nav-item"><a className="nav-link">AboutUs</a></li>
                 </ul>
 
-                {/* Right Side */}
-                <button className="btn logout" onClick={logout}>
-                    Logout
-                </button>
+                <div className="logout-container  ">
+                    <button className="btn  logout" onClick={logout}>
+                        Logout
+                    </button>
+                </div>
+
+
+
 
             </div>
+
         </nav>
     );
 };

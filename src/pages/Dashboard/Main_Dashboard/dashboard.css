@@ -16,7 +16,7 @@
 
 .nav-row {
     position: fixed;
-    top: 600px;
+    bottom: 5px;
     left: 0;
     width: 100%;
     z-index: 999;
@@ -44,6 +44,16 @@
     font-weight:700;
     color:white;
     animation: slideUp 0.7s ease;
+}
+
+@media (max-width:437px) {
+    .nav-row {
+   
+     
+    bottom: 0;
+   
+}
+    
 }
 
 @keyframes slideUp{
